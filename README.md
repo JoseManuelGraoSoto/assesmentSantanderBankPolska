@@ -139,3 +139,18 @@ Right-click → Run 'RunnerTest'
 IntelliJ will execute the tests and show results in the Run window
 
 A visual report will be generated in target/cucumber-report.html which can be opened in any browser
+
+## 🤖 AI Usage Disclosure
+
+This project uses AI tools only in a **supporting role**, and all core test logic was implemented manually.
+
+- **README.md and DEVLOG.md:**  
+  AI was used to help write and structure the documentation in a clear and professional way. I provided prompts and reviewed all content carefully before including it.
+
+- **Cucumber Feature – DataTable validation:**  
+  While writing the feature to validate response fields:
+  I had difficulty figuring out how to validate different types in the table. AI suggested using "ANY" for the type field in the feature and then performing the actual type checks in the step definitions, which I implemented manually.
+- **Report Generated with Cucumber:**
+I have been generating reports with Allure in my work, but to make it faster and easier AI suggested to add "html:target/cucumber-report.html" to the Runner class options. 
+
+![img.png](img.png)
