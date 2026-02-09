@@ -62,9 +62,80 @@ Before running the tests, you need to install and configure the following:
 
     IntelliJ will detect it as a Maven project automatically.
 
+3. **Configure the JDK in IntelliJ:**
 
-3. **Refresh Maven:**
+    File → Project Structure → Project → Project SDK → select Java 17
+
+    Ensure Project language level is also set to 17.
+
+4. **Refresh Maven:**
 
     IntelliJ → Maven → Reload Project
 
     This downloads all dependencies defined in pom.xml.
+
+##  3️⃣ About the pom.xml
+
+- **The pom.xml file is used to:**
+
+    Declare dependencies such as Cucumber, RestAssured, and JUnit
+
+    Configure the build and plugins (for example, Maven Surefire to run tests)
+
+    Manage versions and library compatibility
+
+
+- **Main Dependencies**
+
+| Library        | Version  | Main Use                                           |
+|----------------|---------|--------------------------------------------------|
+| Cucumber Java  | 7.22.2  | Writing features and step definitions           |
+| Cucumber JUnit | 7.22.2  | Running Cucumber tests with JUnit 4             |
+| JUnit          | 4.13.2  | Testing framework for assertions and runners    |
+| RestAssured    | 5.5.5   | Making HTTP requests and validating responses  |
+| Json-Path      | 5.5.5   | Parsing JSON and validating response content   |
+
+All versions were obtained from [mvnrepo](mvnrepository.com) and were chosen to ensure compatibility and stability with Java 17.
+
+## 4️⃣ Project Structure
+
+- `/src/main/java`  
+   API client (e.g., `JokeApiClient`, `ApiConfig`)
+
+- `/src/test/java`  
+  Step Definitions, Test Runners
+
+- `/src/test/resources/features`  
+  Cucumber `.feature` files
+
+- `pom.xml`  
+  Project configuration and dependencies
+
+- `README.md`  
+  Documentation
+
+- `DEVLOG.md`  
+  Development log
+
+> ⚠️ All RestAssured and Cucumber code is in `/src/test/java` because these are tests, not production code.
+
+
+## 5️⃣ How to Execute Tests
+
+### Option 1 - Using Maven from Terminal
+
+    mvn clean test 
+
+Runs all tests in src/test/java
+
+Displays results in the console, including the status of each scenario (passed/failed)
+
+### Option 2 – Using the Cucumber Runner in IntelliJ
+
+Open the class runners.RunnerTest
+
+Right-click → Run 'RunnerTest'
+
+IntelliJ will execute the tests and show results in the Run window
+
+A visual report will be generated in target/cucumber-report.html which can be opened in any browser
