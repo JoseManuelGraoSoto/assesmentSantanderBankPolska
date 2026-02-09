@@ -47,5 +47,16 @@ public class JokeApiClient {
                 .when()
                 .get("/jokes/{id}");
     }
+    /*
+    app.get('/jokes/ten', (req, res) => {
+        res.json(randomTen());
+    });
+     */
+    public Response getRandomTenJokes() {
+        return RestAssured.given()
+                .baseUri(ApiConfig.BASE_URL)
+                .when()
+                .get("/random_ten");
+    }
 }
 

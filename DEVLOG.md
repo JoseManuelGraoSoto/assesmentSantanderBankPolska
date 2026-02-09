@@ -34,7 +34,7 @@
 - Keeps commits incremental: the project can now be cloned, set up, and run with one feature successfully.
 
 ## Commit 3 – Add Scenario Outline for joke by ID and step definitions
-**Date:** 2026-02-08  11:44
+**Date:** 2026-02-09  11:44
 
 **Description:**
 - Added **feature file `jokeByID.feature`** with a **Scenario Outline** to test the `/jokes/{id}` endpoint for multiple IDs.
@@ -51,3 +51,17 @@
 - Adds parameterized testing using Cucumber's Scenario Outline and Examples.
 - Demonstrates ability to test multiple inputs without duplicating scenarios.
 - Keeps commits incremental and readable: first feature was basic, now added multi-ID testing. 
+
+## Commit 4 – Add feature and step definitions for retrieving ten random jokes
+**Date:** 2026-02-09  12:01
+
+**Description:**
+- Added **new feature file `tenJokeValidation.feature`** to test the `/random_ten` endpoint.
+  - Scenario validates that the API returns **exactly 10 jokes**.
+  - Checks HTTP response code 200.
+  - Verifies that each joke contains expected fields: `id`, `type`, `setup`, `punchline`.
+- Implemented **step definitions** in `JokeSteps.java` for this feature:
+  - Step to request ten random jokes using `getRandomTenJokes()`
+  - Step to assert HTTP 200 response
+  - Step to assert that the returned JSON array has length 10
+- Updated **JokeApiClient** to include new method

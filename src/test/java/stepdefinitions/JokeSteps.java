@@ -6,6 +6,9 @@ import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 import io.restassured.response.Response;
 
+import java.util.List;
+import java.util.Map;
+
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.*;
 import static org.junit.Assert.*;
@@ -26,6 +29,9 @@ public class JokeSteps {
     public void iRequestAJokeWithId(int id) {
         response = jokeApiClient.getJokeById(id);
     }
+
+    @When("I request ten random jokes")
+    public void iRequestTenRandomJoke() {response = jokeApiClient.getRandomTenJokes();}
 
     @When("I request a random joke")
     public void iRequestARandomJoke() {
@@ -50,6 +56,12 @@ public class JokeSteps {
     public void theJokeIdShouldBe(int expectedId) {
         int actualId = response.jsonPath().getInt("id");
         assertEquals(expectedId, actualId);
+    }
+
+    @Then("the response should contain {int} jokes")
+    public void theResponseShouldContainNumberOfJokes(int expectedCount) {
+        List<Map<String, Object>> jokes = response.jsonPath().getList("$");
+        assertEquals(expectedCount, jokes.size());
     }
 }
 
