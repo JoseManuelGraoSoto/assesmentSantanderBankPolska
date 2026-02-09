@@ -65,3 +65,24 @@
   - Step to assert HTTP 200 response
   - Step to assert that the returned JSON array has length 10
 - Updated **JokeApiClient** to include new method
+
+## Commit 5 – Add response structure validation and negative/corner cases
+**Date:** 2026-02-09 13:53
+
+**Description:**
+- Added **response structure validation** for `/random_joke` endpoint using **Cucumber DataTable**:
+  - Verifies that all expected fields (`id`, `type`, `setup`, `punchline`) exist in the response
+  - Checks field types (number/string) and patterns (e.g., `id > 0`, `setup` and `punchline` not empty)
+  - Implemented Background step `Given the Joke API is available` to ensure API is up before scenarios
+- Added **negative and corner case scenarios**:
+  - Requesting a joke with invalid ID (e.g., `/jokes/0`)
+  - Validates HTTP 404 status code
+  - Validates that the `type` field in the response is `"error"`
+- Updated **step definitions (`JokeSteps.java`)** to include:
+  - Step to validate DataTable structure
+  - Step to assert specific field values for negative tests
+
+**Reasoning:**
+- Ensures full coverage of **response validation** for key endpoints
+- Demonstrates handling of **error responses** and corner cases
+- Keeps commit incremental: adds structured validation and negative tests as a final layer on top of previous features  
