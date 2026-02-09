@@ -6,6 +6,7 @@ import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 import io.restassured.response.Response;
 
+import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.*;
 import static org.junit.Assert.*;
 
@@ -21,6 +22,11 @@ public class JokeSteps {
         String body = response.getBody().asString();
         assertEquals("pong", body);
     }
+    @When("I request a joke with id {int}")
+    public void iRequestAJokeWithId(int id) {
+        response = jokeApiClient.getJokeById(id);
+    }
+
     @When("I request a random joke")
     public void iRequestARandomJoke() {
         response = jokeApiClient.getRandomJoke();
@@ -38,6 +44,12 @@ public class JokeSteps {
                 .body("type", notNullValue())
                 .body("setup", notNullValue())
                 .body("punchline", notNullValue());
+    }
+
+    @Then("the joke id should be {int}")
+    public void theJokeIdShouldBe(int expectedId) {
+        int actualId = response.jsonPath().getInt("id");
+        assertEquals(expectedId, actualId);
     }
 }
 

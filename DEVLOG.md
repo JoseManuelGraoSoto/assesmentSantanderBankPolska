@@ -32,3 +32,22 @@
 - Provides the basic automation framework to call the API and validate main endpoints.
 - Sets up the foundation for adding more feature files and step definitions in future commits.
 - Keeps commits incremental: the project can now be cloned, set up, and run with one feature successfully.
+
+## Commit 3 – Add Scenario Outline for joke by ID and step definitions
+**Date:** 2026-02-08  11:44
+
+**Description:**
+- Added **feature file `jokeByID.feature`** with a **Scenario Outline** to test the `/jokes/{id}` endpoint for multiple IDs.
+  - Example IDs: 1, 15, 47
+  - Validates that the response status code is 200
+  - Validates that the returned joke ID matches the requested ID
+- Implemented **step definitions** in `JokeSteps.java` for this feature:
+  - Step to request a joke by ID
+  - Step to assert HTTP 200 response
+  - Step to assert the joke ID matches the requested ID
+- Updated **JokeApiClient** if needed to support `/jokes/{id}` requests.
+
+**Reasoning:**
+- Adds parameterized testing using Cucumber's Scenario Outline and Examples.
+- Demonstrates ability to test multiple inputs without duplicating scenarios.
+- Keeps commits incremental and readable: first feature was basic, now added multi-ID testing. 
